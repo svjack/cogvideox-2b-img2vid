@@ -1,5 +1,9 @@
 # cogvideox-2b-img2vid
 
+
+https://github.com/user-attachments/assets/925e733c-cab6-4b09-ad92-f3b8324679c9
+
+
 ### How to
 Clone repo 
 ```bash
