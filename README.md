@@ -8,7 +8,7 @@ https://github.com/user-attachments/assets/925e733c-cab6-4b09-ad92-f3b8324679c9
 Clone repo 
 ```bash
 git clone https://github.com/Nim-Video/cogvideox-2b-img2vid.git
-cd cogvideox-controlnet
+cd cogvideox-2b-img2vid
 ```
   
 Create venv  
