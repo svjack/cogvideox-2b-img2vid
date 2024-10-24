@@ -10,6 +10,8 @@ https://github.com/user-attachments/assets/925e733c-cab6-4b09-ad92-f3b8324679c9
 <p>
     <a href="resources/cogvideox-2b-img2vid-workflow.json">JSON Workflow Example</a>
 </p>
+ComfyUI custom node can be found <a href="https://github.com/Nim-Video/ComfyUI-CogVideoXWrapper">here</a>.
+
 ### How to
 Clone repo 
 ```bash
