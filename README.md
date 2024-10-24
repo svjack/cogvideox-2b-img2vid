@@ -3,7 +3,13 @@
 
 https://github.com/user-attachments/assets/925e733c-cab6-4b09-ad92-f3b8324679c9
 
-
+### ComfyUI Example
+<p>
+    <img src="resources/cogvideox-2b-img2vid-workflow.png" width="800" height="400" title="preview"/>
+</p>
+<p>
+    <a href="resources/cogvideox-2b-img2vid-workflow.json">JSON Workflow Example</a>
+</p>
 ### How to
 Clone repo 
 ```bash
