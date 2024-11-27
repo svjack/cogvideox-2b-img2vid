@@ -15,7 +15,7 @@ from diffusers import (
     CogVideoXTransformer3DModel
 )
 from datetime import datetime, timedelta
-import moviepy as mp
+import moviepy.editor as mp
 
 from img2vid_pipeline import CogVideoXImg2VidPipeline
 
