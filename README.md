@@ -20,6 +20,7 @@ ComfyUI custom node can be found <a href="https://github.com/Nim-Video/ComfyUI-C
    ```bash
    sudo apt-get update
    sudo apt-get install git-lfs cbm ffmpeg
+   sudo apt-get upgrade ffmpeg
    ```
 
 2. **Create and Activate Conda Environment**
