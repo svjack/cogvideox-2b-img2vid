@@ -45,6 +45,7 @@ source venv/bin/activate
 Install requirements
 ```bash
 pip install -r requirements.txt
+pip install "httpx[socks]"
 ```
   
 ### Simple examples
