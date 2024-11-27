@@ -32,10 +32,18 @@ def save_video(tensor):
     return video_path
 
 
-def convert_to_gif(video_path):
+def resize_video(video_path, image_width, image_height):
+    clip = mp.VideoFileClip(video_path)
+    clip = clip.resize(width=image_width, height=image_height)
+    resized_video_path = video_path.replace(".mp4", "_resized.mp4")
+    clip.write_videofile(resized_video_path, codec='libx264')
+    return resized_video_path
+
+
+def convert_to_gif(video_path, image_width, image_height):
     clip = mp.VideoFileClip(video_path)
     clip = clip.set_fps(8)
-    clip = clip.resize(height=240)
+    clip = clip.resize(width=image_width, height=image_height)
     gif_path = video_path.replace(".mp4", ".gif")
     clip.write_gif(gif_path, fps=8)
     return gif_path
@@ -124,7 +132,7 @@ def main(args):
         with gr.Row():
             with gr.Column():
                 with gr.Column():
-                    image_input = gr.Image(label="Input Image (will be resized to 720 * 480)")
+                    image_input = gr.Image(label="Input Image")
                     with gr.Row():
                         download_video_button = gr.File(label="📥 Download Video", visible=False)
                         download_gif_button = gr.File(label="📥 Download GIF", visible=False)
@@ -143,20 +151,22 @@ def main(args):
                     generate_button = gr.Button("🎬 Generate Video")
 
             with gr.Column():
-                video_output = gr.Video(label="CogVideoX Generate Video", width=720, height=480)
+                video_output = gr.Video(label="CogVideoX Generate Video")
                 with gr.Row():
                     download_video_button = gr.File(label="📥 Download Video", visible=False)
                     download_gif_button = gr.File(label="📥 Download GIF", visible=False)
 
         def generate(prompt, image_input, num_inference_steps, guidance_scale, seed, progress=gr.Progress(track_tqdm=True)):
-            image = Image.fromarray(image_input).convert("RGB").resize(size=(720, 480))
+            image = Image.fromarray(image_input).convert("RGB")
+            image_width, image_height = image.size
             tensor = infer(image, prompt, num_inference_steps, guidance_scale, seed, progress=progress)
             video_path = save_video(tensor)
-            video_update = gr.update(visible=True, value=video_path)
-            gif_path = convert_to_gif(video_path)
+            resized_video_path = resize_video(video_path, image_width, image_height)
+            video_update = gr.update(visible=True, value=resized_video_path)
+            gif_path = convert_to_gif(resized_video_path, image_width, image_height)
             gif_update = gr.update(visible=True, value=gif_path)
 
-            return video_path, video_update, gif_update
+            return resized_video_path, video_update, gif_update
 
         generate_button.click(
             generate,
