@@ -163,7 +163,7 @@ def main(args):
             inputs=[prompt, image_input, num_inference_steps, guidance_scale, seed],
             outputs=[video_output, download_video_button, download_gif_button],
         )
-    demo.launch()
+    demo.launch(share = True)
 
 
 if __name__ == "__main__":
