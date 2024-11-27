@@ -12,7 +12,24 @@ https://github.com/user-attachments/assets/925e733c-cab6-4b09-ad92-f3b8324679c9
 </p>
 ComfyUI custom node can be found <a href="https://github.com/Nim-Video/ComfyUI-CogVideoXWrapper">here</a>.
 
-### How to
+## Setup and Inference Instructions
+
+### Prerequisites
+
+1. **System Update and Dependencies Installation**
+   ```bash
+   sudo apt-get update
+   sudo apt-get install git-lfs cbm ffmpeg
+   ```
+
+2. **Create and Activate Conda Environment**
+   ```bash
+   conda create --name py310 python=3.10
+   conda activate py310
+   pip install ipykernel
+   python -m ipykernel install --user --name py310 --display-name "py310"
+   ```
+
 Clone repo 
 ```bash
 git clone https://github.com/Nim-Video/cogvideox-2b-img2vid.git
