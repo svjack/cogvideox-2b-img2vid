@@ -51,7 +51,7 @@ pip install -r requirements.txt
 #### Inference with cli
 ```bash
 python -m inference.cli_demo \
-    --video_path "resources/truck.jpg" \
+    --image_path" "resources/truck.jpg" \
     --prompt "A truck is driving through a dirt road, showcasing its capability for off-roading." \
     --model_path NimVideo/cogvideox-2b-img2vid
 ```
