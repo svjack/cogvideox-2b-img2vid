@@ -32,7 +32,7 @@ ComfyUI custom node can be found <a href="https://github.com/Nim-Video/ComfyUI-C
 
 Clone repo 
 ```bash
-git clone https://github.com/Nim-Video/cogvideox-2b-img2vid.git
+git clone https://github.com/svjack/cogvideox-2b-img2vid.git
 cd cogvideox-2b-img2vid
 ```
   
