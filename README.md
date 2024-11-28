@@ -92,7 +92,48 @@ python -m inference.gradio_web_demo \
 </div>
 <p><strong>Prompt:</strong> In a Bauhaus style room, this item is placed on a shiny glass table, with a vase of flowers next to it. In the afternoon sun, the shadows of the blinds are cast on the wall.</p>
 
+# 
+```python
+import torch
+from diffusers import CogVideoXImageToVideoPipeline
+from diffusers.utils import export_to_video, load_image
 
+pipe = CogVideoXImageToVideoPipeline.from_pretrained(
+    "THUDM/CogVideoX1.5-5B-I2V", torch_dtype=torch.bfloat16
+)
+
+pipe.load_lora_weights("NimVideo/cogvideox1.5-5b-prompt-camera-motion", adapter_name="cogvideox-lora")
+pipe.set_adapters(["cogvideox-lora"], [1.0])
+#pipe.to("cuda")
+
+pipe.enable_sequential_cpu_offload()
+pipe.vae.enable_slicing()
+pipe.vae.enable_tiling()
+
+height = 768 
+width = 1360
+image = load_image("resources/truck.jpg").resize((width, height))
+
+prompt = "Camera is moving to the right. A trunk driving on the road."
+
+video_generate = pipe(
+    image=image,
+    prompt=prompt,
+    height=height, 
+    width=width, 
+    num_inference_steps=50,  
+    num_frames=16,  
+    guidance_scale=6.0,
+    generator=torch.Generator().manual_seed(42), 
+).frames[0]
+
+output_path = "truck_right.mp4"
+export_to_video(video_generate, output_path, fps=8)
+
+from IPython import display 
+display.Video(output_path, width=512, height=512
+             )
+```
 
 
 
