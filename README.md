@@ -92,7 +92,7 @@ python -m inference.gradio_web_demo \
 </div>
 <p><strong>Prompt:</strong> In a Bauhaus style room, this item is placed on a shiny glass table, with a vase of flowers next to it. In the afternoon sun, the shadows of the blinds are cast on the wall.</p>
 
-# 
+# NimVideo/cogvideox1.5-5b-prompt-camera-motion demo 
 ```python
 import torch
 from diffusers import CogVideoXImageToVideoPipeline
