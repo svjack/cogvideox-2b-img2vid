@@ -98,13 +98,13 @@ import torch
 from diffusers import CogVideoXImageToVideoPipeline
 from diffusers.utils import export_to_video, load_image
 
+
 pipe = CogVideoXImageToVideoPipeline.from_pretrained(
     "THUDM/CogVideoX1.5-5B-I2V", torch_dtype=torch.bfloat16
 )
 
 pipe.load_lora_weights("NimVideo/cogvideox1.5-5b-prompt-camera-motion", adapter_name="cogvideox-lora")
 pipe.set_adapters(["cogvideox-lora"], [1.0])
-#pipe.to("cuda")
 
 pipe.enable_sequential_cpu_offload()
 pipe.vae.enable_slicing()
@@ -113,9 +113,21 @@ pipe.vae.enable_tiling()
 height = 768 
 width = 1360
 image = load_image("resources/truck.jpg").resize((width, height))
-
+prompt = "Camera is moving to the left. A truck driving forward on a road."
 prompt = "Camera is moving to the right. A trunk driving on the road."
 
+'''
+video_generate = pipe(
+    image=image,
+    prompt=prompt,
+    height=height, 
+    width=width, 
+    num_inference_steps=50,  
+    num_frames=81,  
+    guidance_scale=6.0,
+    generator=torch.Generator().manual_seed(42), 
+).frames[0]
+'''
 video_generate = pipe(
     image=image,
     prompt=prompt,
@@ -127,17 +139,18 @@ video_generate = pipe(
     generator=torch.Generator().manual_seed(42), 
 ).frames[0]
 
-output_path = "truck_right.mp4"
+output_path = "truck.mp4"
 export_to_video(video_generate, output_path, fps=8)
-
-from IPython import display 
-display.Video(output_path, width=512, height=512
-             )
 ```
 
 
+![truck](https://github.com/user-attachments/assets/dbd4f794-1a5a-4683-847d-6e4d2f1f37d0)
 
 
+
+
+
+https://github.com/user-attachments/assets/27c2a003-af72-48fb-989c-1807c8b1aaef
 
 
 
