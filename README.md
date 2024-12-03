@@ -116,18 +116,6 @@ image = load_image("resources/truck.jpg").resize((width, height))
 prompt = "Camera is moving to the left. A truck driving forward on a road."
 prompt = "Camera is moving to the right. A trunk driving on the road."
 
-'''
-video_generate = pipe(
-    image=image,
-    prompt=prompt,
-    height=height, 
-    width=width, 
-    num_inference_steps=50,  
-    num_frames=81,  
-    guidance_scale=6.0,
-    generator=torch.Generator().manual_seed(42), 
-).frames[0]
-'''
 video_generate = pipe(
     image=image,
     prompt=prompt,
