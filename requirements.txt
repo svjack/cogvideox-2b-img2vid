@@ -18,6 +18,6 @@ openai>=1.45.0
 moviepy==1.0.3
 pillow==9.5.0
 
-huggingface_hub==0.25.0
+#huggingface_hub==0.25.0
 httpx[socks]
 peft
